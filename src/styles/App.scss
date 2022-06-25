@@ -1,0 +1,75 @@
+@use "./abstracts/palette";
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: hsl(0, 0%, 95%);
+}
+
+.title {
+  margin: 2rem;
+  text-align: center;
+  color: palette.$gray;
+  line-height: 1rem;
+  #RH {
+    color: palette.$blue;
+  }
+}
+
+#list-container {
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  min-height: 57vh;
+  width: 25vw;
+  box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px,
+    rgb(129, 129, 129) 0px 8px 10px 0px;
+  border-radius: 1.2rem;
+  background-color: hsl(0, 0%, 85%);
+  p {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+#repo-card {
+  background-color: aqua;
+}
+
+@mixin message-box {
+  position: absolute;
+  border-radius: 1rem;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  font-size: large;
+  font-weight: 600;
+}
+
+#loading-box {
+  height: 3rem;
+  width: 10rem;
+  left: 45%;
+  top: 40vh;
+  background-color: palette.$blue;
+  outline: 4px solid darken($color: palette.$blue, $amount: 20);
+  @include message-box;
+}
+
+#error-box {
+  visibility: hidden; //DELETE:
+  width: 50vw;
+  height: 10rem;
+  left: 25%;
+  top: 30vh;
+  background-color: palette.$orange;
+  outline: 5px solid darken($color: palette.$orange, $amount: 20);
+  @include message-box;
+  h2 {
+    margin-bottom: 0rem;
+  }
+  p {
+    margin-top: 0rem;
+  }
+}

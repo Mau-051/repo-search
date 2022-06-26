@@ -3,14 +3,27 @@ import "./styles/App.css";
 import RepoList from "./components/RepoList";
 import Error from "./components/ErrorState";
 import LoadingState from "./components/LoadingState";
+import Searchbar from "./components/Searchbar";
 
 // Util/mapRepos
+/*
 function mapRepos(rawRepo) {
   const { id, name, full_name } = rawRepo;
   return {
     id,
     name,
     fullName: full_name,
+  };
+}
+*/
+function mapRepos(rawRepo) {
+  const { id, name, html_url, description, stargazers_count } = rawRepo;
+  return {
+    id,
+    name,
+    url: html_url,
+    description,
+    stargazers: stargazers_count,
   };
 }
 
@@ -43,10 +56,12 @@ function fetchWrapper(fetchPromise, mapperCb, errorMapper = errorManager) {
 // Services/Repos
 function getMicrosoftRepos(org = "microsoft") {
   return fetchWrapper(
-    fetch(`https://api.---github.com/orgs/${org}/repos`),
+    fetch(`https://api.github.com/orgs/${org}/repos`),
     (data) => data.map(mapRepos)
   );
 }
+
+//search
 
 const networkStatus = {
   IDLE: "IDLE",
@@ -92,13 +107,21 @@ function App() {
       ) : null}
       <>
         <div className="title">
-          <h1>MICROSOFT</h1>
+          <h1 id="org">MICROSOFT</h1>
           <h1 id="RH">REPO HUB</h1>
         </div>
-        <div></div>
+        <div id="search-container">
+          <Searchbar />
+        </div>
         <div id="list-container">
           {request.data.map((repo) => (
-            <RepoList key={repo.id} Name={repo.name} />
+            <RepoList
+              id={repo.id}
+              name={repo.name}
+              url={repo.url}
+              description={repo.description}
+              stargazers={repo.stargazers}
+            />
           ))}
         </div>
       </>

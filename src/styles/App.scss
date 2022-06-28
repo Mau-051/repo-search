@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
+/* {
+  //outline: 1px solid red;
+}
+*/
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -15,7 +19,7 @@ body {
   color: palette.$gray;
   line-height: 1rem;
   #org {
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
   #RH {
     color: palette.$blue;
@@ -40,8 +44,13 @@ body {
     outline: 3px solid darken($color: palette.$gray, $amount: 20);
     border-radius: 1em;
   }
-  span {
+  button {
     margin-left: 1rem;
+    border: none;
+    background-color: hsla(0, 0%, 0%, 0);
+    vertical-align: bottom;
+    font-size: 1rem;
+    cursor: pointer;
   }
 }
 
@@ -74,6 +83,7 @@ body {
     font-weight: 600;
     color: darken($color: palette.$blue, $amount: 20);
     span {
+      font-size: 1.3rem;
       vertical-align: text-bottom;
     }
   }
@@ -109,18 +119,17 @@ body {
   height: 3rem;
   width: 10rem;
   left: 45%;
-  top: 40vh;
+  top: 50vh;
   background-color: palette.$blue;
   outline: 4px solid darken($color: palette.$blue, $amount: 20);
   @include message-box;
 }
 
 #error-box {
-  visibility: hidden; //DELETE:
   width: 50vw;
   height: 10rem;
-  left: 25%;
-  top: 30vh;
+  left: 24.7%;
+  top: 50vh;
   background-color: palette.$orange;
   outline: 5px solid darken($color: palette.$orange, $amount: 20);
   @include message-box;

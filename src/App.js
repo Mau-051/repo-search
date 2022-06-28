@@ -6,16 +6,7 @@ import LoadingState from "./components/LoadingState";
 import Searchbar from "./components/Searchbar";
 
 // Util/mapRepos
-/*
-function mapRepos(rawRepo) {
-  const { id, name, full_name } = rawRepo;
-  return {
-    id,
-    name,
-    fullName: full_name,
-  };
-}
-*/
+
 function mapRepos(rawRepo) {
   const { id, name, html_url, description, stargazers_count } = rawRepo;
   return {
@@ -54,7 +45,8 @@ function fetchWrapper(fetchPromise, mapperCb, errorMapper = errorManager) {
 }
 
 // Services/Repos
-function getMicrosoftRepos(org = "microsoft") {
+function getOrgRepos(org = "microsoft") {
+  console.log(org);
   return fetchWrapper(
     fetch(`https://api.github.com/orgs/${org}/repos`),
     (data) => data.map(mapRepos)
@@ -83,7 +75,7 @@ function App() {
 
   useEffect(() => {
     async function fetchRepos() {
-      const [error, repos] = await getMicrosoftRepos();
+      const [error, repos] = await getOrgRepos();
       if (error) {
         setRequest({
           data: [],
@@ -98,6 +90,11 @@ function App() {
     fetchRepos();
   }, []);
 
+  function hhhh(org) {
+    getOrgRepos(org);
+    //fetchRepos();
+  }
+
   return (
     <>
       {isLoading ? <LoadingState /> : null}
@@ -111,7 +108,7 @@ function App() {
           <h1 id="RH">REPO HUB</h1>
         </div>
         <div id="search-container">
-          <Searchbar />
+          <Searchbar getOrgRepos={hhhh} />
         </div>
         <div id="list-container">
           {request.data.map((repo) => (

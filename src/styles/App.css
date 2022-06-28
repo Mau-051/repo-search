@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+/* {
+  //outline: 1px solid red;
+}
+*/
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -14,7 +18,7 @@ body {
   line-height: 1rem;
 }
 .title #org {
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 .title #RH {
   color: #00a4ef;
@@ -38,8 +42,13 @@ body {
   outline: 3px solid #404040;
   border-radius: 1em;
 }
-#search-container span {
+#search-container button {
   margin-left: 1rem;
+  border: none;
+  background-color: hsla(0deg, 0%, 0%, 0);
+  vertical-align: bottom;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 #list-container {
@@ -71,6 +80,7 @@ body {
   color: #005e89;
 }
 #repo-card #repo-name span {
+  font-size: 1.3rem;
   vertical-align: text-bottom;
 }
 #repo-card #bottom-data {
@@ -94,7 +104,7 @@ body {
   height: 3rem;
   width: 10rem;
   left: 45%;
-  top: 40vh;
+  top: 50vh;
   background-color: #00a4ef;
   outline: 4px solid #005e89;
   position: absolute;
@@ -107,11 +117,10 @@ body {
 }
 
 #error-box {
-  visibility: hidden;
   width: 50vw;
   height: 10rem;
-  left: 25%;
-  top: 30vh;
+  left: 24.7%;
+  top: 50vh;
   background-color: #f25022;
   outline: 5px solid #a42c0a;
   position: absolute;

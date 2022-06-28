@@ -15,10 +15,10 @@ export default function Searchbar(props) {
         id="serch-bar"
         type="text"
         placeholder="Enter organization name. Example: Microsoft"
-        autocomplete="off"
+        autoComplete="off"
       />
       <button type="submit">
-        <span class="material-symbols-rounded">search</span>
+        <span className="material-symbols-rounded">search</span>
       </button>
     </form>
   );

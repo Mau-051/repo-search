@@ -45,8 +45,7 @@ function fetchWrapper(fetchPromise, mapperCb, errorMapper = errorManager) {
 }
 
 // Services/Repos
-function getOrgRepos(org = "microsoft") {
-  console.log(org);
+function getOrgRepos(org) {
   return fetchWrapper(
     fetch(`https://api.github.com/orgs/${org}/repos`),
     (data) => data.map(mapRepos)
@@ -68,6 +67,7 @@ function App() {
     data: [],
     error: null,
   });
+  const [organization, setOrganization] = useState("microsoft");
 
   const isLoading = request.status === networkStatus.LOADING;
   const hasError = request.status === networkStatus.ERROR;
@@ -75,7 +75,7 @@ function App() {
 
   useEffect(() => {
     async function fetchRepos() {
-      const [error, repos] = await getOrgRepos();
+      const [error, repos] = await getOrgRepos(organization);
       if (error) {
         setRequest({
           data: [],
@@ -88,12 +88,7 @@ function App() {
     }
 
     fetchRepos();
-  }, []);
-
-  function hhhh(org) {
-    getOrgRepos(org);
-    //fetchRepos();
-  }
+  }, [organization]);
 
   return (
     <>
@@ -108,7 +103,7 @@ function App() {
           <h1 id="RH">REPO HUB</h1>
         </div>
         <div id="search-container">
-          <Searchbar getOrgRepos={hhhh} />
+          <Searchbar getOrgRepos={setOrganization} />
         </div>
         <div id="list-container">
           {request.data.map((repo) => (
@@ -123,20 +118,6 @@ function App() {
         </div>
       </>
     </>
-    /*
-    <div className="App">
-      {isLoading ? <p>Loading...</p> : null}
-      {hasError ? (
-        <div>
-          <h2>{networkError.code}</h2>
-          <p>{networkError.message}</p>
-        </div>
-      ) : null}
-      {request.data.map((repo) => (
-        <p key={repo.id}>{repo.name}</p>
-      ))}
-    </div>
-    */
   );
 }
 

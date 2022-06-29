@@ -5,6 +5,7 @@ import Error from "./components/ErrorState";
 import LoadingState from "./components/LoadingState";
 import Searchbar from "./components/Searchbar";
 import Pagination from "./components/Pagination";
+import ReposPerPage from "./components/ReposPerPage";
 
 // Util/mapRepos
 
@@ -73,7 +74,7 @@ function App() {
   // pagination
   const [orgRepos, setOrgRepos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [reposPerPage] = useState(10);
+  const [reposPerPage, setReposPerPage] = useState(10);
 
   const isLoading = request.status === networkStatus.LOADING;
   const hasError = request.status === networkStatus.ERROR;
@@ -134,6 +135,10 @@ function App() {
           reposPerPage={reposPerPage}
           totalRepos={orgRepos.length}
           paginate={paginate}
+        />
+        <ReposPerPage
+          reposPerPage={reposPerPage}
+          setReposPerPage={setReposPerPage}
         />
       </>
     </>

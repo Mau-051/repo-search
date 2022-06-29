@@ -108,8 +108,8 @@ body {
 
 //from pagination.js
 #pagination {
-  width: 45vw;
-  margin: 2rem auto 3rem;
+  width: 47vw;
+  margin: 2rem auto;
   padding: 0.5rem;
   text-align: center;
   display: flex;
@@ -128,6 +128,37 @@ body {
     text-decoration: none;
     padding: 5px 10px;
     color: #000;
+  }
+}
+
+#repos-per-page {
+  width: 38vw;
+  padding: 1rem 0;
+  margin: 2rem auto 3rem;
+  display: flex;
+  box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px,
+    rgb(129, 129, 129) 0px 8px 10px 0px;
+  border-radius: 1.2rem;
+  background-color: hsl(0, 0%, 85%);
+  align-content: center;
+  justify-content: center;
+  label {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  select {
+    margin: 0 0.5rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  input {
+    height: 2rem;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: lighten($color: palette.$gray, $amount: 50);
+    border-radius: 0.5rem;
   }
 }
 

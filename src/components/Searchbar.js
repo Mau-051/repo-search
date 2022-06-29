@@ -2,11 +2,14 @@ import React from "react";
 
 export default function Searchbar(props) {
   const titleOrg = document.getElementById("org");
+  const tabTitle = document.getElementById("tab-title");
 
   function orgsearch(event) {
     event.preventDefault();
-    props.getOrgRepos(event.target[0].value);
-    titleOrg.innerHTML = event.target[0].value;
+    const eValue = event.target[0].value;
+    props.getOrgRepos(eValue);
+    titleOrg.innerHTML = eValue;
+    tabTitle.innerHTML = `${eValue.toUpperCase()} REPO HUB`;
   }
 
   return (

@@ -4,6 +4,7 @@ import RepoList from "./components/RepoList";
 import Error from "./components/ErrorState";
 import LoadingState from "./components/LoadingState";
 import Searchbar from "./components/Searchbar";
+import Pagination from "./components/Pagination";
 
 // Util/mapRepos
 
@@ -69,6 +70,11 @@ function App() {
   });
   const [organization, setOrganization] = useState("microsoft");
 
+  // pagination
+  const [orgRepos, setOrgRepos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [reposPerPage] = useState(10);
+
   const isLoading = request.status === networkStatus.LOADING;
   const hasError = request.status === networkStatus.ERROR;
   const networkError = request.error;
@@ -85,10 +91,17 @@ function App() {
         return;
       }
       setRequest({ data: repos, status: networkStatus.OK, error: null });
+      setOrgRepos(repos);
     }
-
     fetchRepos();
   }, [organization]);
+
+  const indexOfLastRepo = currentPage * reposPerPage;
+  const indexOfFirsRepo = indexOfLastRepo - reposPerPage;
+  const currentRepos = orgRepos.slice(indexOfFirsRepo, indexOfLastRepo);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -105,10 +118,11 @@ function App() {
         <div id="search-container">
           <Searchbar getOrgRepos={setOrganization} />
         </div>
+
         <div id="list-container">
-          {request.data.map((repo) => (
+          {currentRepos.map((repo) => (
             <RepoList
-              id={repo.id}
+              key={repo.id}
               name={repo.name}
               url={repo.url}
               description={repo.description}
@@ -116,6 +130,11 @@ function App() {
             />
           ))}
         </div>
+        <Pagination
+          reposPerPage={reposPerPage}
+          totalRepos={orgRepos.length}
+          paginate={paginate}
+        />
       </>
     </>
   );

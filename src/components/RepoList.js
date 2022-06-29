@@ -3,7 +3,7 @@ import RepoCard from "./RepoCard";
 
 export default function RepoList(props) {
   return (
-    <RepoCard key={props.id}>
+    <RepoCard>
       <a href={props.url} target="_blank" rel="noreferrer" id="repo-name">
         {props.name}
         <span className="material-symbols-outlined">open_in_new</span>

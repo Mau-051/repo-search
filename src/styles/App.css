@@ -39,7 +39,7 @@ body {
   width: 20rem;
   padding: 0 0.5rem;
   background-color: #f3f3f3;
-  outline: 3px solid #404040;
+  outline: 2px solid #4d4d4d;
   border-radius: 1em;
 }
 #search-container button {
@@ -52,10 +52,11 @@ body {
 }
 
 #list-container {
-  margin: 3rem auto;
+  margin: 3rem auto 0;
   padding: 0.2rem 2rem;
   min-height: 57vh;
-  width: 50vw;
+  max-width: 50vw;
+  min-width: 30vw;
   box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px, rgb(129, 129, 129) 0px 8px 10px 0px;
   border-radius: 1.2rem;
   background-color: hsl(0deg, 0%, 85%);
@@ -67,7 +68,7 @@ body {
 
 #repo-card {
   min-height: 7rem;
-  width: 40rem;
+  min-width: 20rem;
   padding: 1.2rem 1rem 0.8rem;
   margin: 2.8rem auto;
   background-color: #f3f3f3;
@@ -100,11 +101,34 @@ body {
   vertical-align: text-bottom;
 }
 
+#pagination {
+  width: 45vw;
+  margin: 2rem auto 3rem;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px, rgb(129, 129, 129) 0px 8px 10px 0px;
+  border-radius: 1.2rem;
+  background-color: hsl(0deg, 0%, 85%);
+}
+#pagination li {
+  display: inline;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+#pagination li a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #000;
+}
+
 #loading-box {
   height: 3rem;
   width: 10rem;
   left: 45%;
-  top: 50vh;
+  top: 65vh;
   background-color: #00a4ef;
   outline: 4px solid #005e89;
   position: absolute;

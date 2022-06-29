@@ -41,7 +41,7 @@ body {
     width: 20rem;
     padding: 0 0.5rem;
     background-color: lighten($color: palette.$gray, $amount: 50);
-    outline: 3px solid darken($color: palette.$gray, $amount: 20);
+    outline: 2px solid darken($color: palette.$gray, $amount: 15);
     border-radius: 1em;
   }
   button {
@@ -55,10 +55,11 @@ body {
 }
 
 #list-container {
-  margin: 3rem auto;
+  margin: 3rem auto 0;
   padding: 0.2rem 2rem;
   min-height: 57vh;
-  width: 50vw;
+  max-width: 50vw;
+  min-width: 30vw;
   box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px,
     rgb(129, 129, 129) 0px 8px 10px 0px;
   border-radius: 1.2rem;
@@ -72,7 +73,7 @@ body {
 // from repoCard.js
 #repo-card {
   min-height: 7rem;
-  width: 40rem;
+  min-width: 20rem;
   padding: 1.2rem 1rem 0.8rem;
   margin: 2.8rem auto;
   background-color: lighten($color: palette.$gray, $amount: 50);
@@ -104,7 +105,32 @@ body {
     }
   }
 }
-//
+
+//from pagination.js
+#pagination {
+  width: 45vw;
+  margin: 2rem auto 3rem;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: rgb(130, 130, 130) 12px 10px 28px 0px,
+    rgb(129, 129, 129) 0px 8px 10px 0px;
+  border-radius: 1.2rem;
+  background-color: hsl(0, 0%, 85%);
+  li {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #000;
+  }
+}
+
 @mixin message-box {
   position: absolute;
   border-radius: 1rem;
@@ -119,7 +145,7 @@ body {
   height: 3rem;
   width: 10rem;
   left: 45%;
-  top: 50vh;
+  top: 65vh;
   background-color: palette.$blue;
   outline: 4px solid darken($color: palette.$blue, $amount: 20);
   @include message-box;

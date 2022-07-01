@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+function calculatePages(totalRepos, reposPerPage) {
+  const pageNumber = Math.ceil(totalRepos / reposPerPage);
+  return Array(pageNumber).fill(null);
+}
 
 export default function Pagination({ reposPerPage, totalRepos, paginate }) {
-  const pageNumbers = [];
+  const [pages, setPages] = useState(() =>
+    calculatePages(totalRepos, reposPerPage)
+  );
 
-  for (let i = 1; i <= Math.ceil(totalRepos / reposPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  useEffect(() => {
+    setPages(calculatePages(totalRepos, reposPerPage));
+  }, [totalRepos, reposPerPage]);
 
   return (
     <nav>
       <ul id="pagination">
-        {pageNumbers.map((number) => (
-          <li key={number}>
-            <a onClick={() => paginate(number)} href="!#">
-              {number}
-            </a>
-          </li>
-        ))}
+        {pages.map((_, index) => {
+          const number = index + 1;
+          return (
+            <li key={number}>
+              <a onClick={() => paginate(number)} href="!#">
+                {number}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

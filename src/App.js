@@ -72,7 +72,6 @@ function App() {
   const [organization, setOrganization] = useState("microsoft");
 
   // pagination
-  const [orgRepos, setOrgRepos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [reposPerPage, setReposPerPage] = useState(10);
 
@@ -82,6 +81,7 @@ function App() {
 
   useEffect(() => {
     async function fetchRepos() {
+      setRequest({ status: networkStatus.LOADING, error: null, data: [] });
       const [error, repos] = await getOrgRepos(organization);
       if (error) {
         setRequest({
@@ -92,55 +92,58 @@ function App() {
         return;
       }
       setRequest({ data: repos, status: networkStatus.OK, error: null });
-      setOrgRepos(repos);
     }
     fetchRepos();
   }, [organization]);
 
   const indexOfLastRepo = currentPage * reposPerPage;
   const indexOfFirsRepo = indexOfLastRepo - reposPerPage;
-  const currentRepos = orgRepos.slice(indexOfFirsRepo, indexOfLastRepo);
+  const currentRepos = request.data.slice(indexOfFirsRepo, indexOfLastRepo);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    document.title = `${organization.toUpperCase()} REPO HUB`;
+  }, [organization]);
+
   return (
     <>
+      <div className="title">
+        <h1 id="org">{organization}</h1>
+        <h1 id="RH">REPO HUB</h1>
+      </div>
+      <div id="search-container">
+        <Searchbar setOrgRepos={setOrganization} />
+      </div>
       {isLoading ? <LoadingState /> : null}
-
       {hasError ? (
         <Error Code={networkError.code} Message={networkError.message} />
       ) : null}
-      <>
-        <div className="title">
-          <h1 id="org">MICROSOFT</h1>
-          <h1 id="RH">REPO HUB</h1>
-        </div>
-        <div id="search-container">
-          <Searchbar getOrgRepos={setOrganization} />
-        </div>
-
-        <div id="list-container">
-          {currentRepos.map((repo) => (
-            <RepoList
-              key={repo.id}
-              name={repo.name}
-              url={repo.url}
-              description={repo.description}
-              stargazers={repo.stargazers}
-            />
-          ))}
-        </div>
-        <Pagination
-          reposPerPage={reposPerPage}
-          totalRepos={orgRepos.length}
-          paginate={paginate}
-        />
-        <ReposPerPage
-          reposPerPage={reposPerPage}
-          setReposPerPage={setReposPerPage}
-        />
-      </>
+      {currentRepos.length ? (
+        <>
+          <div id="list-container">
+            {currentRepos.map((repo) => (
+              <RepoList
+                key={repo.id}
+                name={repo.name}
+                url={repo.url}
+                description={repo.description}
+                stargazers={repo.stargazers}
+              />
+            ))}
+          </div>
+          <Pagination
+            reposPerPage={reposPerPage}
+            totalRepos={request.data.length}
+            paginate={paginate}
+          />
+          <ReposPerPage
+            reposPerPage={reposPerPage}
+            setReposPerPage={setReposPerPage}
+          />
+        </>
+      ) : null}
     </>
   );
 }

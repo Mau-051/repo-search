@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Error(props) {
   var info = "";
-  if (props.Code === 404) {
-    info = "🤐 i wont say who's fault it is but it's not mine (yours)";
-  } else if (props.Code === 500) {
+  if (props.Code >= 500) {
     info = "🤐 i wont say who's fault it is but it's not mine (it is)";
+  } else if (props.Code >= 400) {
+    info = "🤐 i wont say who's fault it is but it's not mine (yours)";
   } else {
     info = "🤔🤔🤔";
   }
